@@ -94,7 +94,7 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
-    }
+    }  
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -107,12 +107,12 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/computer.png',   // Top row is water
+                'images/tile.png',   // Row 1 of 3 of stone
+                'images/tile.png',   // Row 2 of 3 of stone
+                'images/tile.png',   // Row 3 of 3 of stone
+                'images/carpet.png',   // Row 1 of 2 of grass
+                'images/carpet.png'    // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 5,
@@ -169,11 +169,11 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
-        'images/stone-block.png',
-        'images/water-block.png',
-        'images/grass-block.png',
+        'images/tile.png',
+        'images/computer.png',
+        'images/carpet.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/technigal.png'
     ]);
     Resources.onReady(init);
 
