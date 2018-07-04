@@ -20,6 +20,7 @@ Enemy.prototype.update = function(dt) {
       this.time = Math.floor(Math.random() * (max - min + 1)) + min;
       this.time = this.time * dt * 10;
       this.x += this.time;
+	  
 };
 
 // Draw the enemy on the screen, required method for game
@@ -45,8 +46,9 @@ Player.prototype.update = function(dt) {
 		this.x = 0;
 	} if (this.y < 30){
 		this.y = 30;
+	    toggleModal();
 	} if (this.y >= 350) {
-	    this.y = 350;
+        this.y = 350;
     } if (this.x >= 400) {
 		this.x = 400;
 	}
@@ -74,6 +76,8 @@ switch (e){
 }
 };
 
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -95,6 +99,23 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+
 });
+
+
+// Modal display modified from https://sabe.io/tutorials/how-to-create-modal-popup-box
+
+var modal = document.querySelector(".modal");
+document.querySelector('.modalRestart').addEventListener('click', toggleModal);
+
+function toggleModal(){
+  modal.classList.toggle("show-modal");
+  closeModal();
+}
+
+function closeModal(){
+   var closeButton = document.querySelector(".close-button");
+   closeButton.addEventListener("click", toggleModal);
+}
 
 
