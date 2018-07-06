@@ -14,6 +14,7 @@ var Enemy = function(y, minSpeed, maxSpeed) {
 
 // Updates the enemy's positions using
 // Parameter: dt, a time delta between ticks
+// Modified from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
 Enemy.prototype.update = function(dt) {
 	  let min = Math.ceil(this.min);
@@ -107,6 +108,8 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 
 });
+
+//Check for collisions.  Modified from https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
 
 function checkCollisions(){
 	playerX = player.x;
