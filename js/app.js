@@ -1,6 +1,5 @@
 // Enemies our player must avoid
 
-
 	 
 var Enemy = function(y, minSpeed, maxSpeed) {
     this.sprite = 'images/enemy-bug.png';
@@ -15,6 +14,7 @@ var Enemy = function(y, minSpeed, maxSpeed) {
 
 // Updates the enemy's positions using
 // Parameter: dt, a time delta between ticks
+
 Enemy.prototype.update = function(dt) {
 	  let min = Math.ceil(this.min);
 	  let max = Math.floor(this.max);
@@ -25,6 +25,7 @@ Enemy.prototype.update = function(dt) {
 };
 
 // Draw the enemy on the screen, required method for game
+
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	if (this.x >= 420){
@@ -34,9 +35,7 @@ Enemy.prototype.render = function() {
 
 };
 
-// Now write your on player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Create the Player and its prototypes
 
 var Player = function(){
     this.sprite = 'images/technigal.png';
@@ -46,7 +45,8 @@ var Player = function(){
 	this.height = 75;
 };
 
-Player.prototype.update = function(dt) {
+Player.prototype.update = function() {
+	//Set canvas boundaries for the player
 	if(this.x < 0){
 		this.x = 0;
 	} if (this.y < 30){
@@ -60,16 +60,17 @@ Player.prototype.update = function(dt) {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-	
-	if(this.y === 30){
-		this.y = 350;
-	    toggleModal();
-	}
+	//If Player reaches the computers, trigger the modal and reset the player.
+	   if(this.y === 30){
+		  this.y = 350;
+	      toggleModal();
+	  }
+
 };
 
 Player.prototype.handleInput = function(e) {
-
-switch (e){
+//Handles movement of the player.  Modified from https://stackoverflow.com/questions/23585320/how-to-move-object-with-keyboard-in-javascript
+	switch (e){
     case 'left':
 	  this.x += -50;
 	  break;
@@ -82,21 +83,19 @@ switch (e){
 	case 'down':
 	  this.y += 50;
 	  break;
-}
+   }	
 };
 
 
+// allEnemy array sets y coordinate, min, and max speeds for the enemies
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-let allEnemies = [new Enemy(180, 5, 35), new Enemy(100, 5, 20), new Enemy(250, 10, 40)];
+let allEnemies = [new Enemy(180, 5, 35), new Enemy(100, 5, 20), new Enemy(250, 10, 40)]; 
 let player = new Player();
 
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
+
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
@@ -108,6 +107,21 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 
 });
+
+function checkCollisions(){
+	playerX = player.x;
+	playerY = player.y;
+	playerW = player.width;
+	playerH = player.height;
+	
+	for(var i = 0; i < allEnemies.length; i++){
+	if (playerX < allEnemies[i].x + allEnemies[i].width  && playerX + playerW  > allEnemies[i].x &&
+		playerY < allEnemies[i].y + allEnemies[i].height && playerY + playerH > allEnemies[i].y) {
+        player.x = 200;
+	    player.y = 350;
+	} 
+	}
+};
 
 
 // Modal display modified from https://sabe.io/tutorials/how-to-create-modal-popup-box
