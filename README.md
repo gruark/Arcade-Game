@@ -9,14 +9,14 @@ TechniGal - your friendly office computer hero - is having a rough day.
 Help TechniGal overcome her fear of creepy-crawlies to rescue the user machines from computer bugs.
 
 
-## instructions
+## Instructions
 
 Use your up, down, left, and right arrow keys to navigate to the infected machines.  Don't step on a bug, or TechniGal will run away!
 
 ### This Game was Built with:
 
 * JavaScript ES5
-* CSS canvas
+* HTML5 canvas
 * Udacity's Arcade game engine
 * Daniel Cook's Planet Cute image pack (modified in Photoshop)
 
