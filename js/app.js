@@ -1,14 +1,13 @@
 // Enemies our player must avoid
 
 	 
-var Enemy = function(y, minSpeed, maxSpeed) {
+var Enemy = function(y) {
     this.sprite = 'images/enemy-bug.png';
   	this.x = 0;
   	this.y = y;
   	this.width = 50;
   	this.height = 60; 
-	this.max = maxSpeed;
-	this.min = minSpeed;
+	this.speed = Math.floor((Math.random() * 35) + 9);
 };
 	
 
@@ -16,10 +15,9 @@ var Enemy = function(y, minSpeed, maxSpeed) {
 // Parameter: dt, a time delta between ticks
 // Modified from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
+
 Enemy.prototype.update = function(dt) {
-	  let min = Math.ceil(this.min);
-	  let max = Math.floor(this.max);
-      this.time = Math.floor(Math.random() * (max - min + 1)) + min;
+	  this.time = this.speed;
       this.time = this.time * dt * 10;
       this.x += this.time;
 	  
@@ -31,6 +29,7 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	if (this.x >= 420){
 		this.x = 0;
+		this.speed =  Math.floor((Math.random() * 35) + 9);
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
 
@@ -87,10 +86,27 @@ Player.prototype.handleInput = function(e) {
    }	
 };
 
+//Check for collisions.  Modified from https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+
+Player.prototype.checkCollisions = function(){
+	playerX = player.x;
+	playerY = player.y;
+	playerW = player.width;
+	playerH = player.height;
+	
+	for(var i = 0; i < allEnemies.length; i++){
+	if (playerX < allEnemies[i].x + allEnemies[i].width  && playerX + playerW  > allEnemies[i].x &&
+		playerY < allEnemies[i].y + allEnemies[i].height && playerY + playerH > allEnemies[i].y) {
+        player.x = 200;
+	    player.y = 350;
+	 } 
+	}
+};
+
 
 // allEnemy array sets y coordinate, min, and max speeds for the enemies
 
-let allEnemies = [new Enemy(100, 5, 20), new Enemy(180, 5, 35), new Enemy(250, 10, 40)]; 
+let allEnemies = [new Enemy(100), new Enemy(180), new Enemy(250)]; 
 let player = new Player();
 
 
@@ -108,24 +124,6 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 
 });
-
-//Check for collisions.  Modified from https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
-
-function checkCollisions(){
-	playerX = player.x;
-	playerY = player.y;
-	playerW = player.width;
-	playerH = player.height;
-	
-	for(var i = 0; i < allEnemies.length; i++){
-	if (playerX < allEnemies[i].x + allEnemies[i].width  && playerX + playerW  > allEnemies[i].x &&
-		playerY < allEnemies[i].y + allEnemies[i].height && playerY + playerH > allEnemies[i].y) {
-		debugger;
-        player.x = 200;
-	    player.y = 350;
-	} 
-	}
-};
 
 
 // Modal display modified from https://sabe.io/tutorials/how-to-create-modal-popup-box
