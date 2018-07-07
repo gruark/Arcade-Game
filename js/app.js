@@ -5,8 +5,8 @@ var Enemy = function(y, minSpeed, maxSpeed) {
     this.sprite = 'images/enemy-bug.png';
   	this.x = 0;
   	this.y = y;
-  	this.width = 100;
-  	this.height = 65; 
+  	this.width = 50;
+  	this.height = 60; 
 	this.max = maxSpeed;
 	this.min = minSpeed;
 };
@@ -42,8 +42,8 @@ var Player = function(){
     this.sprite = 'images/technigal.png';
     this.x = 200;
 	this.y = 350;
-	this.width = 75;
-	this.height = 75;
+	this.width = 50;
+	this.height = 50;
 };
 
 Player.prototype.update = function() {
@@ -90,7 +90,7 @@ Player.prototype.handleInput = function(e) {
 
 // allEnemy array sets y coordinate, min, and max speeds for the enemies
 
-let allEnemies = [new Enemy(180, 5, 35), new Enemy(100, 5, 20), new Enemy(250, 10, 40)]; 
+let allEnemies = [new Enemy(100, 5, 20), new Enemy(180, 5, 35), new Enemy(250, 10, 40)]; 
 let player = new Player();
 
 
@@ -120,6 +120,7 @@ function checkCollisions(){
 	for(var i = 0; i < allEnemies.length; i++){
 	if (playerX < allEnemies[i].x + allEnemies[i].width  && playerX + playerW  > allEnemies[i].x &&
 		playerY < allEnemies[i].y + allEnemies[i].height && playerY + playerH > allEnemies[i].y) {
+		debugger;
         player.x = 200;
 	    player.y = 350;
 	} 
