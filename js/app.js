@@ -4,7 +4,7 @@
 var Enemy = function() {
     this.sprite = 'images/enemy-bug.png';
   	this.x = 0;
-  	this.y = Math.floor((Math.random() * 150) + 170);
+  	this.y = Math.floor((Math.random() * 100) + 170);
   	this.width = 50;
   	this.height = 60; 
 	this.speed = Math.floor((Math.random() * 35) + 9);
@@ -129,17 +129,17 @@ document.addEventListener('keyup', function(e) {
 
 // Modal display modified from https://sabe.io/tutorials/how-to-create-modal-popup-box
 
-var modal = document.querySelector(".modal");
+var modal = document.querySelector('.modal');
 document.querySelector('.modalRestart').addEventListener('click', toggleModal);
 
 function toggleModal(){
-  modal.classList.toggle("show-modal");
+  modal.classList.toggle('show-modal');
   closeModal();
 }
 
 function closeModal(){
-   var closeButton = document.querySelector(".close-button");
-   closeButton.addEventListener("click", toggleModal);
+   var closeButton = document.querySelector('.close-button');
+   closeButton.addEventListener('click', toggleModal);
 }
 
 
